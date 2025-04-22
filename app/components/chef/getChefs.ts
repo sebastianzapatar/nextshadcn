@@ -3,7 +3,7 @@
 import axios from "axios";
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 export interface Chef {
-  id: number;
+  id: string;
   name: string;
   skill: string;
 }
