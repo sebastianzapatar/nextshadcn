@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const navItems = [
   { name: "Inicio", href: "/" },
-  { name: "Acerca", href: "/about" },
+  { name: "Lista Chef", href: "/chef" },
   { name: "Contacto", href: "/contact" },
 ];
 
