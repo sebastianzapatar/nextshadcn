@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default async function ChefList() {
   const chefs = await getChefs();
-
+  console.log(chefs); // Log the chefs data to the console
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {chefs.map((chef) => (
@@ -14,7 +14,7 @@ export default async function ChefList() {
           <CardContent className="space-y-2">
             <h2 className="text-lg font-bold">{chef.name}</h2>
             <p className="text-gray-600">Habilidad: {chef.skill}</p>
-            <Link href={`/chefs/${chef.id}`}>
+            <Link href={`/chef/${chef.id}`}>
               <Button>Ver Detalles</Button>
             </Link>
           </CardContent>
