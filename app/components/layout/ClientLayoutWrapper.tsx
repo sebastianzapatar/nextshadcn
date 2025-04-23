@@ -5,13 +5,13 @@ import { useAuthStore } from "@/app/lib/auth-store";
 import Sidebar from "@/app/components/Sidebar";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-
+import Cookies from "js-cookie";
 export default function ClientLayoutWrapper({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
       setAuthenticated(true,token);
     }

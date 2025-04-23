@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ClientLayoutWrapper from "./components/layout/ClientLayoutWrapper";
+import { Toaster } from "sonner";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
      <html lang="es">
       <body className="min-h-screen flex flex-col md:flex-row">
         <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+        <Toaster richColors position="top-center" closeButton />
       </body>
     </html>
   );
