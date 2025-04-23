@@ -1,19 +1,21 @@
 // components/chefs/getChefs.ts
-// components/chefs/getChefs.ts
 import axios from "axios";
+import Cookies from "js-cookie";
+
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export interface Chef {
   id: string;
   name: string;
   skill: string;
 }
 
-export async function getChefs(): Promise<Chef[]> {
-  try {
-    const response = await axios.get(baseUrl+"/chef");
-
-    return response.data;
-  } catch (error) {
-    throw new Error("Error al obtener chefs");
-  }
+// getChefs.ts
+export async function getChefs(token: string): Promise<Chef[]> {
+  const response = await axios.get(`${baseUrl}/chef`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 }

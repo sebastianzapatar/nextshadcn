@@ -47,7 +47,7 @@ export default function LoginForm() {
       });
 
       // ✅ Actualizar estado global
-      setAuthenticated(true);
+      setAuthenticated(true,token);
 
       toast.success("Bienvenido");
       router.push("/chef/list");

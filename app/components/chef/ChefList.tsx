@@ -1,12 +1,25 @@
 // components/chefs/ChefList.tsx
-import { getChefs } from "./getChefs";
+'use client';
+
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { getChefs, Chef } from "./getChefs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useAuthStore } from "@/app/lib/auth-store";
 
-export default async function ChefList() {
-  const chefs = await getChefs();
-  console.log(chefs); // Log the chefs data to the console
+export default function ChefList() {
+  const [chefs, setChefs] = useState<Chef[]>([]);
+  const token = useAuthStore((state) => state.token);
+  
+  useEffect(() => {
+    if (token) {
+      console.log("✅ Token disponible, llamando a getChefs:", token);
+      getChefs(token).then(setChefs).catch(console.error);
+    }
+  }, [token]);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {chefs.map((chef) => (
@@ -23,3 +36,4 @@ export default async function ChefList() {
     </div>
   );
 }
+

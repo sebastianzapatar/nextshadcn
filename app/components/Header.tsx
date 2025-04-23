@@ -10,7 +10,7 @@ export default function Header() {
 
   const handleLogout = () => {
     Cookies.remove("token");
-    setAuthenticated(false);
+    setAuthenticated(false,null);
     router.push("/login");
   }
 

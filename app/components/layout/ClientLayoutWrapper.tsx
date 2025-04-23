@@ -13,7 +13,7 @@ export default function ClientLayoutWrapper({ children }: { children: React.Reac
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      setAuthenticated(true);
+      setAuthenticated(true,token);
     }
   }, [setAuthenticated]);
 

@@ -10,7 +10,7 @@ export default function LogoutButton() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");         
-    setAuthenticated(false);                  
+    setAuthenticated(false,null);                  
     router.push("/login");                    
   };
 
