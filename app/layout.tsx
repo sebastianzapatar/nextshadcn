@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ClientLayoutWrapper from "./components/layout/ClientLayoutWrapper";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,23 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className="min-h-screen flex flex-col md:flex-row">
-        {/* Sidebar fijo en pantallas grandes */}
-        <div className="hidden md:block w-64 bg-blue-700 text-white">
-          <Sidebar />
-        </div>
-
-        {/* Contenido principal */}
-        <div className="flex-1 flex flex-col">
-          {/* Sidebar móvil */}
-          <div className="md:hidden p-2">
-            <Sidebar />
-          </div>
-          <Header />
-          <main className="flex-1 p-6 bg-gray-100">{children}</main>
-          <Footer />
-        </div>
-      </body>
-    </html>
+    <body className="min-h-screen flex flex-col md:flex-row">
+      <ClientLayoutWrapper>{children}</ClientLayoutWrapper>
+    </body>
+  </html>
   );
 }

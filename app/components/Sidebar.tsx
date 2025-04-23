@@ -6,8 +6,8 @@ import { Menu } from "lucide-react";
 import Link from "next/link";
 
 const navItems = [
-  { name: "Inicio", href: "/" },
-  { name: "Lista Chef", href: "/chef" },
+  { name: "Inicio", href: "/chef/createChef" },
+  { name: "Lista Chef", href: "/chef/list" },
   { name: "Contacto", href: "/contact" },
 ];
 
