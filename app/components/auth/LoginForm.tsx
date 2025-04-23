@@ -11,7 +11,9 @@ import { useRouter } from "next/navigation";
 import { EmailField } from "./EmailField";
 import { PasswordField } from "./PasswordField";
 import { useAuthStore } from "@/app/lib/auth-store";
+import Cookies from "js-cookie";
 
+// Esquema de validación con zod
 const loginSchema = z.object({
   email: z.string().email("Correo inválido"),
   password: z.string().min(12, "Contraseña incorrecta"),
@@ -20,13 +22,13 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
-    const form = useForm<LoginFormValues>({
-        resolver: zodResolver(loginSchema),
-        defaultValues: {
-          email: "",
-          password: "",
-        },
-      })
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
   const router = useRouter();
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
@@ -36,11 +38,18 @@ export default function LoginForm() {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/dictator/login`, data);
       const token = res.data.access_token;
 
-      localStorage.setItem("token", token);
-      setAuthenticated(true); 
+      // ✅ Guardar el token en una cookie para que lo lea el middleware
+      Cookies.set("token", token, {
+        path: "/",
+        secure: true,
+        sameSite: "strict",
+      });
+
+      // ✅ Actualizar estado global
+      setAuthenticated(true);
 
       toast.success("Bienvenido");
-      router.push("/chef/list"); 
+      router.push("/chef/list");
     } catch (error) {
       toast.error("Credenciales incorrectas");
       console.error(error);

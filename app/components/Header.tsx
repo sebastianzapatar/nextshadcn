@@ -3,16 +3,16 @@
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "../lib/auth-store";
 import { Button } from "@/components/ui/button";
-
+import Cookies from "js-cookie";
 export default function Header() {
   const router = useRouter();
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    Cookies.remove("token");
     setAuthenticated(false);
     router.push("/login");
-  };
+  }
 
   return (
     <header className="bg-white shadow px-6 py-4 flex justify-between items-center">

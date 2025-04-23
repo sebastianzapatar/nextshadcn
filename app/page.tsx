@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation";
 import { useAuthStore } from "./lib/auth-store";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
+import Cookies from "js-cookie";
 export default function HomePage() {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token");
     if (token) {
-      setAuthenticated(true); // sincronizar estado global
+      setAuthenticated(true);
     }
   }, [setAuthenticated]);
 
