@@ -13,6 +13,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const token = Cookies.get("token");
+    console.log("Token:", token);
     if (token) {
       setAuthenticated(true);
     }

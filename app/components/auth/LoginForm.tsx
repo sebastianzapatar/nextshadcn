@@ -36,7 +36,8 @@ export default function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/dictator/login`, data);
-      const token = res.data.access_token;
+      console.log(res.data);
+      const token = res.data.token;
 
       // ✅ Guardar el token en una cookie para que lo lea el middleware
       Cookies.set("token", token, {
